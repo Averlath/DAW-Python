@@ -26,7 +26,6 @@ class Yatzy:
             if die == 1:
                 sum_ones += 1
         return sum_ones
-    
 
     @staticmethod
     def twos(*dice):
@@ -82,7 +81,6 @@ class Yatzy:
     #if (self.dice[i] == 5):
     #s = s + 5
     #return s
-    
 
     #def sixes(self):
     #sum = 0
@@ -133,11 +131,9 @@ class Yatzy:
     			small_straight += 1
     			if die == 6:
     				six_in_straight = 1	
-
     	if small_straight == 5 and six_in_straight == 0:
     		return 15
     	return 0
-    
 
     @staticmethod
     def largeStraight(*dice):
@@ -151,7 +147,6 @@ class Yatzy:
         if large_straight == 5 and one_in_straight == 0:
         	return 20
         return 0
-    
 
     @staticmethod
     def fullHouse(*dice):
