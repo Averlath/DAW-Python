@@ -122,36 +122,31 @@ class Yatzy:
         return 0    
 
     @staticmethod
-    def smallStraight( d1,  d2,  d3,  d4,  d5):
-        tallies = [0]*6
-        tallies[d1-1] += 1
-        tallies[d2-1] += 1
-        tallies[d3-1] += 1
-        tallies[d4-1] += 1
-        tallies[d5-1] += 1
-        if (tallies[0] == 1 and
-            tallies[1] == 1 and
-            tallies[2] == 1 and
-            tallies[3] == 1 and
-            tallies[4] == 1):
-            return 15
-        return 0
+    def smallStraight(*dice):
+    	small_straight = 0
+    	six_in_straight = 0
+    	for die in dice:
+    		if dice.count(die) == 1:
+    			small_straight += 1
+    			if die == 6:
+    				six_in_straight = 1	
+
+    	if small_straight == 5 and six_in_straight == 0:
+    		return 15
+    	return 0
     
 
     @staticmethod
-    def largeStraight( d1,  d2,  d3,  d4,  d5):
-        tallies = [0]*6
-        tallies[d1-1] += 1
-        tallies[d2-1] += 1
-        tallies[d3-1] += 1
-        tallies[d4-1] += 1
-        tallies[d5-1] += 1
-        if (tallies[1] == 1 and
-            tallies[2] == 1 and
-            tallies[3] == 1 and
-            tallies[4] == 1
-            and tallies[5] == 1):
-            return 20
+    def largeStraight(*dice):
+        large_straight = 0
+        one_in_straight = 0
+        for die in dice:
+        	if dice.count(die) == 1:
+        		large_straight += 1
+        		if die == 1:
+        			one_in_straight = 1
+        if large_straight == 5 and one_in_straight == 0:
+        	return 20
         return 0
     
 
@@ -272,7 +267,7 @@ if __name__ == '__main__':
     assert 15 == Yatzy.three_of_a_kind(5, 1, 2, 5, 5)
     assert 18 == Yatzy.three_of_a_kind(1, 2, 6, 6, 6)
 
-    #Assert Four of a Kind
+    #Assert Four of a Kind.
     assert 0 == Yatzy.four_of_a_kind(6, 5, 4, 3, 2)
     assert 4 == Yatzy.four_of_a_kind(1, 2, 1, 1, 1)
     assert 8 == Yatzy.four_of_a_kind(2, 2, 3, 2, 2)
@@ -280,3 +275,17 @@ if __name__ == '__main__':
     assert 16 == Yatzy.four_of_a_kind(1, 4, 4, 4, 4)
     assert 20 == Yatzy.four_of_a_kind(5, 1, 5, 5, 5)
     assert 24 == Yatzy.four_of_a_kind(6, 3, 6, 6, 6)
+
+    #Assert Small Straight.
+    assert 0 == Yatzy.smallStraight(2, 3, 4, 5, 6)
+    assert 0 == Yatzy.smallStraight(1, 2, 3, 5, 6)
+    assert 15 == Yatzy.smallStraight(1, 2, 3, 4, 5)
+    assert 15 == Yatzy.smallStraight(2, 3, 4, 5, 1)
+    assert 15 == Yatzy.smallStraight(3, 4, 5, 1, 2)
+
+    #Assert Large Straight.
+    assert 0 == Yatzy.largeStraight(1, 2, 3, 4, 5)
+    assert 0 == Yatzy.largeStraight(1, 2, 3, 4, 6)
+    assert 20 == Yatzy.largeStraight(2, 3, 4, 5, 6)
+    assert 20 == Yatzy.largeStraight(6, 2, 3, 4, 5)
+    assert 20 == Yatzy.largeStraight(3, 5, 2, 6, 4)
