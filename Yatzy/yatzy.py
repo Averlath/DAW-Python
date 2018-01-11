@@ -41,40 +41,55 @@ class Yatzy:
                 sum_threes += 3
         return sum_threes
     
+    @staticmethod
+    def fours(*dice):
+        sum_fours = 0
+        for die in dice:
+            if die == 4:
+                sum_fours += 4
+        return sum_fours
 
-    def __init__(self, d1, d2, d3, d4, _5):
-        self.dice = [0]*5
-        self.dice[0] = d1
-        self.dice[1] = d2
-        self.dice[2] = d3
-        self.dice[3] = d4
-        self.dice[4] = _5
+    @staticmethod
+    def fives(*dice):
+        sum_fives = 0
+        for die in dice:
+            if die == 5:
+                sum_fives += 5
+        return sum_fives
+
+    @staticmethod
+    def sixes(*dice):
+        sum_sixes = 0
+        for die in dice:
+            if die == 6:
+                sum_sixes += 6
+        return sum_sixes
+
+    #def fours(self):
+    #sum_fours = 0
+    #for die in self.dice:
+    #if self.dice[die] == 4:
+    #sum_fours += 4
+    #return sum_fours
+
+    #def fives(self):
+    #s = 0
+    #i = 0
+    #for i in range(len(self.dice)): 
+    #if (self.dice[i] == 5):
+    #s = s + 5
+    #return s
     
-    def fours(self):
-        sum = 0
-        for at in range(5):
-            if (self.dice[at] == 4): 
-                sum += 4
-        return sum
 
-    def fives(self):
-        s = 0
-        i = 0
-        for i in range(len(self.dice)): 
-            if (self.dice[i] == 5):
-                s = s + 5
-        return s
-    
-
-    def sixes(self):
-        sum = 0
-        for at in range(len(self.dice)): 
-            if (self.dice[at] == 6):
-                sum = sum + 6
-        return sum
+    #def sixes(self):
+    #sum = 0
+    #for at in range(len(self.dice)): 
+    #if (self.dice[at] == 6):
+    #sum = sum + 6
+    #return sum
     
     @staticmethod
-    def score_pair( d1,  d2,  d3,  d4,  d5):
+    def one_pair(*dice):
         counts = [0]*6
         counts[d1-1] += 1
         counts[d2-1] += 1
@@ -237,5 +252,26 @@ if __name__ == '__main__':
     assert 12 == Yatzy.threes(3, 3, 2, 3, 3)
     assert 15 == Yatzy.threes(3, 3, 3, 3, 3)
 
-    #
-    assert 0 == Yatzy.fives(2, 1, 1, 3, 6)
+    #Assers Fours.
+    assert 0 == Yatzy.fours(2, 1, 5, 3, 5)
+    assert 4 == Yatzy.fours(3, 2, 1, 4, 2)
+    assert 8 == Yatzy.fours(6, 4, 5, 4, 1)
+    assert 12 == Yatzy.fours(3, 4, 3, 4, 4)
+    assert 16 == Yatzy.fours(3, 4, 4, 4, 4)
+    assert 20 == Yatzy.fours(4, 4, 4, 4, 4)
+
+    #Asserts Fives.
+    assert 0 == Yatzy.fives(2, 1, 6, 4, 3)
+    assert 5 == Yatzy.fives(3, 5, 1, 4, 2)
+    assert 10 == Yatzy.fives(1, 3, 5, 5, 1)
+    assert 15 == Yatzy.fives(3, 5, 5, 5, 1)
+    assert 20 == Yatzy.fives(5, 5, 5, 5, 3)
+    assert 25 == Yatzy.fives(5, 5, 5, 5, 5)
+
+    #Asserts Sixes.
+    assert 0 == Yatzy.sixes(2, 1, 5, 4, 5)
+    assert 6 == Yatzy.sixes(6, 5, 1, 4, 2)
+    assert 12 == Yatzy.sixes(6, 6, 5, 3, 1)
+    assert 18 == Yatzy.sixes(6, 3, 6, 6, 1)
+    assert 24 == Yatzy.sixes(3, 6, 6, 6, 6)
+    assert 30 == Yatzy.sixes(6, 6, 6, 6, 6)
