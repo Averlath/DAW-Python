@@ -108,25 +108,18 @@ class Yatzy:
     	return 0
 
     @staticmethod
+    def three_of_a_kind(*dice):
+        for die in dice:
+        	if dice.count(die) == 3:
+        		return die * 3
+        return 0
+
+    @staticmethod
     def four_of_a_kind(*dice):
         for die in dice:
         	if dice.count(die) == 4:
         		return die * 4
-        return 0  
-
-    @staticmethod
-    def three_of_a_kind( d1,  d2,  d3,  d4,  d5):
-        t = [0]*6
-        t[d1-1] += 1
-        t[d2-1] += 1
-        t[d3-1] += 1
-        t[d4-1] += 1
-        t[d5-1] += 1
-        for i in range(6):
-            if (t[i] >= 3):
-                return (i+1) * 3
-        return 0
-    
+        return 0    
 
     @staticmethod
     def smallStraight( d1,  d2,  d3,  d4,  d5):
@@ -269,6 +262,15 @@ if __name__ == '__main__':
     assert 10 == Yatzy.two_pair(2, 2, 3, 3, 5)
     assert 14 == Yatzy.two_pair(3, 3, 4, 4, 5)
     assert 22 == Yatzy.two_pair(5, 5, 3, 6, 6)
+
+    #Assert Three of a Kind.
+    assert 0 == Yatzy.three_of_a_kind(3, 1, 2, 3, 5)
+    assert 3 == Yatzy.three_of_a_kind(2, 1, 1, 3, 1)
+    assert 6 == Yatzy.three_of_a_kind(5, 1, 2, 2, 2)
+    assert 9 == Yatzy.three_of_a_kind(3, 3, 2, 1, 3)
+    assert 12 == Yatzy.three_of_a_kind(4, 4, 1, 2, 4)
+    assert 15 == Yatzy.three_of_a_kind(5, 1, 2, 5, 5)
+    assert 18 == Yatzy.three_of_a_kind(1, 2, 6, 6, 6)
 
     #Assert Four of a Kind
     assert 0 == Yatzy.four_of_a_kind(6, 5, 4, 3, 2)
