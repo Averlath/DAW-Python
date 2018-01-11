@@ -1,5 +1,4 @@
 class Yatzy:
-
     def __init__(self, *dice):
         self.dice = list(dice)
 
@@ -12,9 +11,13 @@ class Yatzy:
 
     @staticmethod
     def yatzy(*dice):
-        if dice.count(dice[0]) != 5:
-           return 0
-        return 50
+    	yatzy_check = 0
+    	for die in dice:
+    		if dice.count(die) == 5:
+    			yatzy_check = 1
+    	if yatzy_check == 1:
+    		return 50
+    	return 0
     
     @staticmethod
     def ones(*dice):
