@@ -90,51 +90,29 @@ class Yatzy:
     
     @staticmethod
     def one_pair(*dice):
-        counts = [0]*6
-        counts[d1-1] += 1
-        counts[d2-1] += 1
-        counts[d3-1] += 1
-        counts[d4-1] += 1
-        counts[d5-1] += 1
-        at = 0
-        for at in range(6):
-            if (counts[6-at-1] == 2):
-                return (6-at)*2
+        for die in dice:
+	        if dice.count(die) == 2:
+	            return die * 2
         return 0
     
     @staticmethod
-    def two_pair( d1,  d2,  d3,  d4,  d5):
-        counts = [0]*6
-        counts[d1-1] += 1
-        counts[d2-1] += 1
-        counts[d3-1] += 1
-        counts[d4-1] += 1
-        counts[d5-1] += 1
-        n = 0
-        score = 0
-        for i in range(6):
-            if (counts[6-i-1] >= 2):
-                n = n+1
-                score += (6-i)
-                    
-        if (n == 2):
-            return score * 2
-        else:
-            return 0
-    
+    def two_pair(*dice):
+    	two_pair_score = 0
+    	n = 0
+    	for die in dice:
+    		if dice.count(die) == 2:
+    			n += 1
+    			two_pair_score += die
+    	if n == 4:
+    		return two_pair_score
+    	return 0
+
     @staticmethod
-    def four_of_a_kind( _1,  _2,  d3,  d4,  d5):
-        tallies = [0]*6
-        tallies[_1-1] += 1
-        tallies[_2-1] += 1
-        tallies[d3-1] += 1
-        tallies[d4-1] += 1
-        tallies[d5-1] += 1
-        for i in range(6):
-            if (tallies[i] >= 4):
-                return (i+1) * 4
-        return 0
-    
+    def four_of_a_kind(*dice):
+        for die in dice:
+        	if dice.count(die) == 4:
+        		return die * 4
+        return 0  
 
     @staticmethod
     def three_of_a_kind( d1,  d2,  d3,  d4,  d5):
@@ -275,3 +253,28 @@ if __name__ == '__main__':
     assert 18 == Yatzy.sixes(6, 3, 6, 6, 1)
     assert 24 == Yatzy.sixes(3, 6, 6, 6, 6)
     assert 30 == Yatzy.sixes(6, 6, 6, 6, 6)
+
+    #Assert One Pair.
+    assert 0 == Yatzy.one_pair(1, 2, 3, 4, 5)
+    assert 2 == Yatzy.one_pair(1, 3, 4, 1, 6)
+    assert 4 == Yatzy.one_pair(2, 4, 1, 2, 6)
+    assert 6 == Yatzy.one_pair(3, 5, 3, 1, 2)
+    assert 8 == Yatzy.one_pair(2, 3, 4, 4, 6)
+    assert 12 == Yatzy.one_pair(6, 2, 1, 3, 6)
+
+    #Assert Two Pair.
+    assert 0 == Yatzy.two_pair(2, 3, 4, 5, 6)
+    assert 6 == Yatzy.two_pair(1, 3, 2, 1, 2)
+    assert 8 == Yatzy.two_pair(3, 1, 3, 1, 2)
+    assert 10 == Yatzy.two_pair(2, 2, 3, 3, 5)
+    assert 14 == Yatzy.two_pair(3, 3, 4, 4, 5)
+    assert 22 == Yatzy.two_pair(5, 5, 3, 6, 6)
+
+    #Assert Four of a Kind
+    assert 0 == Yatzy.four_of_a_kind(6, 5, 4, 3, 2)
+    assert 4 == Yatzy.four_of_a_kind(1, 2, 1, 1, 1)
+    assert 8 == Yatzy.four_of_a_kind(2, 2, 3, 2, 2)
+    assert 12 == Yatzy.four_of_a_kind(1, 3, 3, 3, 3)
+    assert 16 == Yatzy.four_of_a_kind(1, 4, 4, 4, 4)
+    assert 20 == Yatzy.four_of_a_kind(5, 1, 5, 5, 5)
+    assert 24 == Yatzy.four_of_a_kind(6, 3, 6, 6, 6)
