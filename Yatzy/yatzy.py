@@ -151,37 +151,20 @@ class Yatzy:
     
 
     @staticmethod
-    def fullHouse( d1,  d2,  d3,  d4,  d5):
-        tallies = []
-        _2 = False
-        i = 0
-        _2_at = 0
-        _3 = False
-        _3_at = 0
-
-        tallies = [0]*6
-        tallies[d1-1] += 1
-        tallies[d2-1] += 1
-        tallies[d3-1] += 1
-        tallies[d4-1] += 1
-        tallies[d5-1] += 1
-
-        for i in range(6):
-            if (tallies[i] == 2): 
-                _2 = True
-                _2_at = i+1
-            
-
-        for i in range(6):
-            if (tallies[i] == 3): 
-                _3 = True
-                _3_at = i+1
-            
-
-        if (_2 and _3):
-            return _2_at * 2 + _3_at * 3
-        else:
-            return 0
+    def fullHouse(*dice):
+    	fullHouse_score = 0
+    	n = 0
+    	i = 0
+    	for die in dice:
+    		if dice.count(die) == 2:
+    			n += 1
+    			fullHouse_score += die
+    		if dice.count(die) == 3:
+    			i += 1
+    			fullHouse_score += die
+    	if n == 2 and i == 3:
+    		return fullHouse_score
+    	return 0
 
 
 if __name__ == '__main__':
@@ -191,8 +174,13 @@ if __name__ == '__main__':
     assert 21 == Yatzy.chance(4, 5, 5, 6, 1)
 
     #Asserts funcion Yatzy.
+    assert 0 == Yatzy.yatzy(1, 2, 3, 4, 5)
     assert 50 == Yatzy.yatzy(1, 1, 1, 1, 1)
-    assert 0 == Yatzy.yatzy(1, 1, 1, 2, 1)
+    assert 50 == Yatzy.yatzy(2, 2, 2, 2, 2)
+    assert 50 == Yatzy.yatzy(3, 3, 3, 3, 3)
+    assert 50 == Yatzy.yatzy(4, 4, 4, 4, 4)
+    assert 50 == Yatzy.yatzy(5, 5, 5, 5, 5)
+    assert 50 == Yatzy.yatzy(6, 6, 6, 6, 6)
 
     #Asserts Ones.
     assert 0 == Yatzy.ones(3, 3, 3, 4, 5)
@@ -289,3 +277,11 @@ if __name__ == '__main__':
     assert 20 == Yatzy.largeStraight(2, 3, 4, 5, 6)
     assert 20 == Yatzy.largeStraight(6, 2, 3, 4, 5)
     assert 20 == Yatzy.largeStraight(3, 5, 2, 6, 4)
+
+    #Assert Full House.
+    assert 0 == Yatzy.fullHouse(1, 2, 3, 4, 5)
+    assert 0 == Yatzy.fullHouse(1, 1, 1, 1, 2)
+    assert 0 == Yatzy.fullHouse(2, 2, 5, 5, 6)
+    assert 13 == Yatzy.fullHouse(2, 2, 3, 3, 3)
+    assert 17 == Yatzy.fullHouse(3, 4, 3, 4, 3)
+    assert 28 == Yatzy.fullHouse(5, 6, 6, 5, 6)
